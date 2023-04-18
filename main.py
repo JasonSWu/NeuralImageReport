@@ -114,7 +114,7 @@ if __name__ == "__main__":
     EOS_IDX = tokenizer.eos_token_id
 
     # Get processed data
-    train_dataloader, val_dataloader, test_dataloader = get_data('squad')
+    train_dataloader, val_dataloader, test_dataloader = get_data('JosephusCheung/GuanacoDataset')
     
     # The smaller GPT2 model we've loaded in has 50257 words in its vocabulary and uses an embedding size of 768
     embedding = LLM.get_input_embeddings()
