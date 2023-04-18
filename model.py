@@ -19,11 +19,11 @@ class ManualDecoder(nn.Module):
 
     def forward(self, x, encoded, memory, memory_masks, src_padding_mask, tgt_mask, tgt_padding_mask, training):
         output = x
-        for layer in self.layers:
-          output = layer.forward(output, encoded, src_padding_mask, tgt_mask, tgt_padding_mask)
         if not training:
             for mem, mask in zip(memory, memory_masks):
-                output = self.layers[-1].forward(output, mem, mask, tgt_mask, tgt_padding_mask)
+                output = self.layers[0].forward(output, mem, mask, tgt_mask, tgt_padding_mask)
+        for layer in self.layers:
+          output = layer.forward(output, encoded, src_padding_mask, tgt_mask, tgt_padding_mask)
         return self.norm(output)
 
 class FineTuneTransformer(nn.Module):
